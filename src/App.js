@@ -1,23 +1,46 @@
-import logo from './logo.svg';
+import React, { useState } from "react";
 import './App.css';
 
+import Filter from './Components/Filter/Filter';
+import FilterRating from './Components/Filter/FilterRating'
+import Add from "./Components/MovieCard/Add";
+import MovieList from "./Components/MovieList/MovieList";
+import data from './data/data.json'
+
 function App() {
+
+ const[searchValue, setSearchValue] = useState('');
+ const[searchRating,setSearchRating]=useState('');
+  const[movie, setMovie] = useState(data);
+
+  const AddMovies = (newmovies) =>{
+    setMovie([...movie,newmovies
+    
+  ])
+  }
+  const searchMovies = title =>{
+    setSearchValue(title)
+
+  }
+  const searchRatingMovies = rating =>{
+    setSearchRating(rating)
+  
+  }
+ 
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+        
+   
+   
+      <Filter searchMovies={searchMovies}/>  
+      <FilterRating searchRatingMovies={searchRatingMovies}/> 
+    
+      <MovieList movies={movie.filter(movie=>
+      movie.title.toLocaleLowerCase().includes(searchValue.trim().toLocaleLowerCase() ) &&
+          (movie.rating>=searchRating)
+      )}/>
+      <Add onSubmitMovie={AddMovies}/>
     </div>
   );
 }
