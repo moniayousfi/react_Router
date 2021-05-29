@@ -21,6 +21,7 @@ function Add({ onSubmitMovie }) {
     description: "",
     rating: "0",
     posterUrl: "",
+    trailerLink:""
   });
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -88,7 +89,18 @@ function Add({ onSubmitMovie }) {
               onChange={change}
             ></textarea>
           </li>
-
+          <li>
+            <label className="label1">
+              Link <span className="required">*</span>
+            </label>
+            <textarea
+              name="description"
+              id="field5"
+              className="field-long field-textarea"
+              defaultValue={addForm.trailerLink}
+              onChange={change}
+            ></textarea>
+          </li>
           <ReactStars
             count={5}
             name="rating"
@@ -110,6 +122,7 @@ function Add({ onSubmitMovie }) {
                   description: "",
                   posterUrl: "",
                   rating: "",
+                  trailerLink:""
                 });
                 setModalIsOpen(false);
               }}

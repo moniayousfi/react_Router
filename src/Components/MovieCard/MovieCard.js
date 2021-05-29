@@ -1,6 +1,8 @@
 import React from "react";
 import "../MovieCard/MovieCard.css";
 import StarRatings from "react-star-ratings";
+import { Card } from 'react-bootstrap';
+
 function MovieCard({ movie }) {
   const DEFAULT_PLACEHOLDER_IMAGE =
     "https://m.media-amazon.com/images/M/MV5BMTczNTI2ODUwOF5BMl5BanBnXkFtZTcwMTU0NTIzMw@@._V1_SX300.jpg";
@@ -8,16 +10,13 @@ function MovieCard({ movie }) {
   const poster =
     movie.posterUrl === "N/A" ? DEFAULT_PLACEHOLDER_IMAGE : movie.posterUrl;
   return (
-    <div className="movie">
-      <h2>{movie.title}</h2>
-      <div>
-        <img
-          width="200"
-          alt={`The movie titled: ${movie.title}`}
-          src={poster}
-        />
-      </div>
-      <p>{movie.description}</p>
+   <Card style={{ width: '18rem' }}>
+    <Card.Img variant="top" src={poster} />
+    <Card.Body>
+      <Card.Title>{movie.title}</Card.Title>
+      <Card.Text>
+      {movie.description}
+      </Card.Text>
       <StarRatings
         rating={movie.rating}
         starRatedColor="yellow"
@@ -26,7 +25,15 @@ function MovieCard({ movie }) {
         starDimension="25px"
         starSpacing="10px"
       />
-    </div>
+   {/* <Link to={`/movie/${movie.title}`}>
+  Details
+</Link>
+<br/>
+<Link to={`/movie/${movie.title}`}>
+  Play
+  </Link>*/}
+    </Card.Body>
+  </Card>
   );
 }
 
